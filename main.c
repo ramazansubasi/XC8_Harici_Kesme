@@ -20,20 +20,19 @@
 #pragma config IESO = OFF       // Internal External Switchover bit (Internal External Switchover mode disabled)
 
 #define _XTAL_FREQ 4000000
-#define Buton RB0
 #define LED RB1
 
 void interrupt INT(void){
-    unsigned int i;         // i?aretsiz 8 bit de?i?ken tan?mlan?yor
-    if (INT0IF==1){         // RBO/INT kesmesi olu?tu mu?
-       LED=~LED;            // i her artt???nda LED'in durumu de?i?ecek
-        __delay_ms(10);     // Buton ark? için gecikme
+    unsigned int i;         // isaretsiz 8 bit degisken tanimlaniyor
+    if (INT0IF==1){         // RBO/INT kesmesi olustu mu?
+       LED=~LED;            // LED Toggle ediliyor
+        __delay_ms(10);     // Buton arki icin gecikme
     }
-    INT0IF=0;               // RBo/INT Kesme Bayra?? S?f?rlan?yor
+    INT0IF=0;               // RBo/INT Kesme Bayragi sifirlaniyor
 }
 void main(void) {
-    TRISB=0b00000001;       // RBO giri?
-    PORTB=0x00;             // PORTB Komple S?f?rland?
+    TRISB=0b00000001;       // RBO giris
+    PORTB=0x00;             // PORTB Cikislari Temizlendi
     INTEDG=1;               // Yükselen Kenar Tetikleme
     INT0IE=1;               // RBO/INT Kesmesi Aktif Edildi
     GIE=1;                  // Tüm Kesmeler Aktif
